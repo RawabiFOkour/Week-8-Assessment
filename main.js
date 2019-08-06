@@ -36,16 +36,32 @@ var object2={
 */
 
 //1) WRITE YOUR CODE UNDER THIS LINE         
+let sum =(x,y)=>{return x+y};
+  
 
 //2) WRITE YOUR CODE UNDER THIS LINE         
-
+let consoleReturn =(x,y)=>{
+  console.log(x)
+  return y
+}
 //3) WRITE YOUR CODE UNDER THIS LINE         
-
+let name="Alex"
+let age=25
+let result=`My name is:  ${name} + "and my age is: " +${age} `
 //4) WRITE YOUR CODE UNDER THIS LINE         
-
+let food="Fried Chicken"
+let color="Blue"
+let object={
+  food,
+  color
+}
 //5) WRITE YOUR CODE UNDER THIS LINE         
 
-
+let object2={
+  multi(a,b){
+    return a * b
+  }
+}
 
 
 
@@ -74,9 +90,27 @@ Output =>
 
 // WRITE YOUR CODE UNDER THIS LINE
 
+class Computer{
+  constructor(OS,RAM,CPU){
+    this.OS=OS;
+    this.RAM=RAM;
+    this.CPU=CPU;
+  }
 
 
+  doubleRAM(){
+    return this.RAM*2;
+  }
 
+}
+
+let computer1= new Computer(Windows,16,I7);
+let computer2= new Computer(Linux,8,I5);
+let computer3= new Computer(Mac,4,I3);
+
+ console.log(computer1);
+ console.log(computer2);
+ console.log(computer3);
 
 
 
@@ -86,6 +120,8 @@ please fix the errors inside them
 */
 
 // App Component
+import React, { Component } from 'react';
+import App from './App';
 import Tasks from './components/Tasks';
 
 export default class App extends Component {
@@ -93,36 +129,52 @@ export default class App extends Component {
     title: 'ELIZABETH GREENE',
     todos: ['eat', 'eat eat', 'eact again']
   };
-  changeTitle() {
-    state.title = 'AGGREGOR ZOLDYCK'
+  changeTitle =() => {
+    //this.state.title = 'AGGREGOR ZOLDYCK';
+    this.setState({title : 'AGGREGOR ZOLDYCK'});
   }
+  
   render() {
+
+    const {title, todos }=this.state;
+
     return (
-      <h1>App Component => state.title</h1>
+
+      <React.Fragment>
+      <h1>App Component =>{title} </h1>
       <button onClick={this.changeTitle}>Change Title</button>
-      <Tasks tasks={this.todos} changeTitleFromChild={this.changeTitle} />
+      <Tasks tasks={todos} changeTitleFromChild={this.changeTitle} />
+      </React.Fragment>
     );
   }
 }
 
 // Tasks Component
 import React, { Component } from 'react';
+import Tasks from './components/Tasks';
 
-class Tasks extends Component {
+export default class Tasks extends Component {
   state = {
     day: "Sat"
   };
-  changeDay() {
+
+  changeDay =()=> {
     day = 'Sun'
   }
 
   render() {
+
+    const { changeTitleFromChild, tasks }=this.props;
+    const {day }=this.state;
+
     return (
+      <React.Fragment>
       <div>
-        <h1>Tasks Component => state.day</h1>
+        <h1>Tasks Component => {day}</h1>
         <button onClick={this.changeDay}>Change Tasks State</button>
-        <button onClick={changeTitle}>Change App State</button>
+        <button onClick={changeTitleFromChild}>Change App State</button>
       </div>
+      </React.Fragment>
     );
   }
 }
